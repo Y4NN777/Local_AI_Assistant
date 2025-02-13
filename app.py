@@ -23,3 +23,32 @@ async def start_chat():
             await msg.stream_token(token)
             
     await msg.send()
+    
+    @cl.step(type="tool")
+    async def tool_step(input_message, image=None):
+        
+        interaction = cl.user_session.get("interaction")
+        
+        if image:
+            interaction.append({ 
+                "role": "user",
+                "content": input_message,
+                "images": image
+                })
+            
+        else:
+            interaction.append({"role":"user",
+                                "content": input_message})
+            
+        
+        response = ollama.chat(model="llama3.2-vision",
+                               messages = interaction)
+        
+        interaction.append({
+            "role":"assistant",
+            "content": response.message.content
+        })
+        
+        return response
+        
+        
