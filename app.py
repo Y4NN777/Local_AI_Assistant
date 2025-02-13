@@ -16,4 +16,10 @@ async def start_chat():
 
     
     start_message = f""" Hi dear {getUsername()},\n
-                         I'm your """
+                         I'm your free and alternative to chat gpt, Can I help you with something?"""
+                         
+    msg = cl.Message(content= '')
+    for token in start_chat:
+            await msg.stream_token(token)
+            
+    await msg.send()
