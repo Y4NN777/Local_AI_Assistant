@@ -49,7 +49,7 @@ async def tool(input_message, image=None):
         
     
     # Retrieve response to the user prompt from the model
-    response = await ollama.chat(model="llama3.2-vision",
+    response = ollama.chat(model="llama3.2-vision",
                             messages = interaction)
     
     # Add the response to the interaction history
