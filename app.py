@@ -71,6 +71,7 @@ async def main(message: cl.Message):
         # invoke the lm interaction tool with the prompt with the image
         tool_res = await tool(message.content, [i.path for i in images])
     else:
+
         # invoke the llm interaction tool with the prompt with the image
         tool_res = await tool(message.content)
         
