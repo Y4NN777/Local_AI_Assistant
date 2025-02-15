@@ -17,8 +17,8 @@ async def start_chat():
     
     # The stream system's intro message tokenizing for the requests
     
-    start_message = f""" Hi dear Y4NN ,\n
-                         I'm your free and alternative to chat gpt, Can I help you with something?"""
+    start_message = """ Hi dear Y4NN,
+                        I'm your free and alternative to chat gpt, Can I help you with something?"""
                          
     
     msg = cl.Message(content= "")
@@ -49,7 +49,7 @@ async def tool(input_message, image=None):
         
     
     # Retrieve response to the user prompt from the model
-    response = ollama.chat(model="llama3.2-vision",
+    response = await ollama.chat(model="llama3.2-vision",
                             messages = interaction)
     
     # Add the response to the interaction history
@@ -71,7 +71,6 @@ async def main(message: cl.Message):
         # invoke the lm interaction tool with the prompt with the image
         tool_res = await tool(message.content, [i.path for i in images])
     else:
-        
         # invoke the llm interaction tool with the prompt with the image
         tool_res = await tool(message.content)
         
